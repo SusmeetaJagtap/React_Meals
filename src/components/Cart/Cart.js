@@ -1,4 +1,5 @@
 import React from "react";
+import Modal from "../UI/Modal";
 import classes from "./Cart.module.css";
 const Cart = () => {
   const cartItems = (
@@ -9,17 +10,17 @@ const Cart = () => {
     </ul>
   );
   return (
-    <div className={classes["cart-item"]}>
+    <Modal className={classes["cart-item"]}>
       {cartItems}
       <div className={classes.total}>
         <span>Total Amount:</span>
         <span>39.62</span>
       </div>
-      <div className={classes.action}>
+      <div className={classes.actions}>
         <button className={classes["button--alt"]}>Close</button>
         <button className={classes.button}>Order</button>
       </div>
-    </div>
+    </Modal>
   );
 };
 
