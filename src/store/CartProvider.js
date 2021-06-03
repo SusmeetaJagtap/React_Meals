@@ -3,9 +3,24 @@ import CartContex from "./cart-contex";
 const cartReducer = (state, action) => {
   switch (action.type) {
     case "ADD":
-      const updatedItems = state.items.concat(action.item);
       const updatedAmount =
         state.totalAmount + action.item.price * action.item.amount;
+      const cartItemIndex = state.items.findIndex(
+        (item) => item.id === action.item.id
+      );
+      let existingCartItem = state.items[cartItemIndex];
+      let updatedItems;
+      if (existingCartItem) {
+        let updatedCartItem = {
+          ...existingCartItem,
+          amount: existingCartItem.amount + action.item.amount,
+        };
+        updatedItems = [...state.items];
+        updatedItems[cartItemIndex] = updatedCartItem;
+      } else {
+        updatedItems = state.items.concat(action.item);
+      }
+
       return {
         items: updatedItems,
         totalAmount: updatedAmount,
